@@ -1,14 +1,19 @@
 from logging.config import fileConfig
-import asyncio
 
+import asyncio
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
 
-from src.config.database import Base  # adjust path if needed
+from src.config.database import Base  
 
-# alembic config
 config = context.config
+from settings import settings  
+config.set_main_option(
+    "sqlalchemy.url",
+    settings.DATABASE_URL,
+)
+
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
@@ -36,7 +41,6 @@ def run_migrations_online() -> None:
 
     async def do_migrations():
         async with connectable.connect() as connection:
-            # 1) configure the EnvironmentContext using the *sync* connection object
             def _configure(sync_conn):
                 context.configure(
                     connection=sync_conn,
@@ -47,9 +51,7 @@ def run_migrations_online() -> None:
 
             await connection.run_sync(_configure)
 
-            # 2) run migrations inside a sync function so context.run_migrations() gets no extra args
             def _run_migrations(sync_conn):
-                # begin_transaction here creates the right transactional context for Alembic
                 with context.begin_transaction():
                     context.run_migrations()
 
