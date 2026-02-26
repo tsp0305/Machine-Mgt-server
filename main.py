@@ -4,7 +4,7 @@ from src.routes import router
 from src.helper.handler import BaseAppException
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-
+from settings import settings
 
 app = FastAPI()
 
@@ -25,7 +25,7 @@ app.add_middleware(
 app.include_router(router, prefix="/api")
 
 def run():
-    uvicorn.run("main:app",host="0.0.0.0",port=8080,reload=True)
+    uvicorn.run("main:app",host="0.0.0.0",port=settings.PORT)
 
 @app.exception_handler(BaseAppException)
 async def base_app_exception_handler(
