@@ -4,8 +4,6 @@ from settings import settings
 
 DATABASE_URL = settings.DATABASE_URL
 
-# DATABASE_URL = "postgresql+asyncpg://neondb_owner:npg_VFKP92SqtrpB@ep-winter-sunset-a18ex91w-pooler.ap-southeast-1.aws.neon.tech/neondb"
-
 Base = declarative_base()
 
 engine = create_async_engine(DATABASE_URL)

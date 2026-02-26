@@ -12,7 +12,7 @@ origins = [
     "http://localhost:5173",   
     "http://127.0.0.1:5173",
     "http://192.168.160.225:3000",
-    "machine-mgt.vercel.app",
+    "https://machine-glmflejx6-tsp0305s-projects.vercel.app",
 ]
 
 app.add_middleware(
