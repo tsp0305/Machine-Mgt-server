@@ -1,9 +1,7 @@
 # src/validator/compressed_air_validator.py
 from pydantic import BaseModel
 from typing import Optional
-
 from .base_validator import BaseValidator
-
 
 class compressed_air_validator(BaseValidator, BaseModel):
     id: Optional[int] = None

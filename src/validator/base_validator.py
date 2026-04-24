@@ -120,5 +120,5 @@ class BaseValidator(BaseModel):
         except ValidationError as error:
             raise HTTPException(
                 status_code=422,
-                detail=error.errors()
+                detail=json.loads(error.json())
             ) from error

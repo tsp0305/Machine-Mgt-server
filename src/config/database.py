@@ -6,7 +6,7 @@ DATABASE_URL = settings.DATABASE_URL
 
 Base = declarative_base()
 
-engine = create_async_engine(DATABASE_URL)
+engine = create_async_engine(DATABASE_URL, pool_pre_ping=True)
 
 SessionLocal = sessionmaker(bind=engine,class_=AsyncSession,expire_on_commit=False)
 async def get_db():
